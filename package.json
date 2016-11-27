@@ -12,9 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "good": "^7.0.2",
     "handlebars": "^4.0.6",
     "hapi": "^15.2.0",
     "hoek": "^4.1.0",
+    "inert": "^4.0.2",
     "vision": "^4.1.0"
   }
 }

@@ -8,7 +8,7 @@ module.exports = {
   handler: function (request, reply) {
     reply.view(
       `${request.client}/index`,
-      {title: 'hello', msg: 'hello world'},
+      {title: 'hello', msg: 'hello world .....'},
       {layout: request.client}
     );
   }

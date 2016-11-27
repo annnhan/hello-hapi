@@ -6,14 +6,17 @@
 
 const Hapi = require('hapi');
 const Hoek = require('hoek');
+const Inert = require('inert');
 const client = require('./utils/client');
 const route = require('./utils/route');
 const config = require('./config');
 
 const server = new Hapi.Server();
 server.connection({ port: 3000 });
-server.app.config = config;
+server.register(Inert, () => {});
 
+server.app.config = config;
+server.app.dirname = __dirname;
 
 // 获取客户端平台
 server.ext('onRequest', function (request, reply) {
@@ -23,9 +26,7 @@ server.ext('onRequest', function (request, reply) {
 
 // 使用模板
 server.register(require('vision'), (err) => {
-
   Hoek.assert(!err, err);
-
   server.views({
     engines: {
       hbs: require('handlebars')
@@ -39,7 +40,6 @@ server.register(require('vision'), (err) => {
 
 // 添加路由
 route(server);
-
 
 server.start((err) => {
   if (err) {
