@@ -4,10 +4,7 @@
 
 module.exports = request => {
   const ua = request.headers['user-agent'];
-  if (ua.indexOf('Android') >= 0 || ua.indexOf('iPhone') >= 0 ) {
-    return 'mobile';
-  }
-  else {
-    return 'web';
-  }
+  return (ua.indexOf('Android') >= 0 || ua.indexOf('iPhone') >= 0 )
+    ? 'mobile'
+    : 'web';
 }
