@@ -5,15 +5,15 @@
 'use strict';
 
 const Hapi = require('hapi');
-const Hoek = require('hoek');
 const Inert = require('inert');
 const client = require('./utils/client');
 const route = require('./utils/route');
 const config = require('./config');
 
 const server = new Hapi.Server();
-server.connection({ port: 3000 });
-server.register(Inert, () => {});
+server.connection({port: 3000});
+server.register(Inert, () => {
+});
 
 server.app.config = config;
 server.app.dirname = __dirname;
@@ -26,7 +26,9 @@ server.ext('onRequest', function (request, reply) {
 
 // 使用模板
 server.register(require('vision'), (err) => {
-  Hoek.assert(!err, err);
+  if (err) {
+    return console.error(err);
+  }
   server.views({
     engines: {
       hbs: require('handlebars')
@@ -38,6 +40,14 @@ server.register(require('vision'), (err) => {
   });
 });
 
+// 日志配置
+server.register({register: require('good'), options: config.log}, (err) => {
+  if (err) {
+    return console.error(err);
+  }
+});
+
+
 // 添加路由
 route(server);
 
@@ -47,3 +57,4 @@ server.start((err) => {
   }
   console.log(`Server running at: ${server.info.uri}`);
 });
+

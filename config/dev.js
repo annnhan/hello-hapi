@@ -5,13 +5,17 @@
 module.exports = {
   log: {
     reporters: {
-      myConsoleReporter: [{
-        module: 'good-squeeze',
-        name: 'Squeeze',
-        args: [{log: '*', response: '*'}]
-      }, {
-        module: 'good-console'
-      }, 'stdout'],
+      console: [
+        {
+          module: 'good-squeeze',
+          name: 'Squeeze',
+          args: [{log: '*', request: '*', response: '*'}]
+        },
+        {
+          module: 'good-console'
+        },
+        'stdout'
+      ]
     }
   }
 }
