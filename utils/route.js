@@ -18,6 +18,5 @@ module.exports = function addRoute(server, dir = controllerDir) {
         server.route(require(controller));
       }
     }
-
   });
 }
