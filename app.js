@@ -20,7 +20,8 @@ server.app.dirname = __dirname;
 
 // 获取客户端平台
 server.ext('onRequest', function (request, reply) {
-  request.client = client(request);
+  request.client = 'web';
+  // request.client = client(request);
   return reply.continue();
 });
 
